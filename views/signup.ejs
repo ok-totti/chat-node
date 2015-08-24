@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div class="jumbotron">
+    <h1>
+      <span class="glyphicon glyphicon-comment"> ABEJACHAT</span>
+    </h1>
+  </div>
+  <div class="container">
+    <h2>新規登録</h2>
+    <div class="form-group">
+      <form action="/create" method="post">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-addon">ユーザー名</span>
+            <input type="text" name="username" class="form-control" placeholder="marimotti" required autofocus maxlength="10">
+            <span class="input-group-addon">パスワード</span>
+            <input type="text" name="pass" class="form-control" placeholder="toshiaki" required autofocus maxlength="10">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="submit">
+                <span class="glyphicon glyphicon-log-in"> 登録</span>
+              </button>
+            </span>
+          </div>
+          <!-- /input-group -->
+        </div>
+        <!-- /.col-lg-6 -->
+      </form>
+      <a href="/">ログイン画面はこちら</a>
+    </div>
+  </div>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>

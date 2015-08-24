@@ -1,0 +1,85 @@
+body {
+	padding: 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: #00B7FF;
+}
+
+.search-form{
+  float: right;
+}
+
+@media (min-width: 1200px){
+.col-lg-6 {
+    width: 100%;
+}
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    width: 50%;
+    float: left;
+}
+
+#selectFileSample2 {
+    display: inline-block;
+    width: 40%;
+    margin-left: 10px;
+}
+
+#selectFileSample1{
+    display: inline-block;
+    float: left;
+    width: 235px;
+}
+
+#upload{
+    border-radius: 4px;
+    padding: 7px;
+    font-size: 10px;
+}
+
+.navigation {
+    padding: 10px 0px 30px 0px;
+    margin: auto;
+    width: 245px;
+}
+
+.prev, .next{
+    border-radius: 4px;
+    border: 1px solid #00B7FF;
+    padding: 10px 15px;
+    margin: 0px 30px;
+}
+
+.well-lg {
+display: block;
+}
+
+#chat-area{
+  padding: 0;
+}
+
+.jumbotron h1{
+  color: white;
+}
+
+.jumbotron {
+    background-color: #a11c39;
+}
+
+.done-upload{
+  font-size: 10px;
+    color: #a11c39;
+    border: 1px solid #a11c39;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.well-lg img{
+  max-width: 100%;
+}

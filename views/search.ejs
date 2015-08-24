@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div class="jumbotron">
+    <h1>
+      <span class="glyphicon glyphicon-comment"> ABEJACHAT</span>
+    </h1>
+    <form action="/search" method="post" accept-charset="utf-8" class="search-form">
+            <input type="text" name="query">
+            <input type="submit" value="検索">
+    </form>
+  </div>
+  <div class="container">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h4>
+          <span class="label label-info"><span class="glyphicon glyphicon-user"> ユーザー名</span>：<%= username %></span>
+        </h4>
+        <span>検索ワード : <%= query %></span>
+      </div>
+      <div class="panel-body">
+        <ul id="chat-area">
+          <% for (var i=0; i<message.length; i++) {%>
+          <li class="well well-lg"><small><%= message[i]["user"] %>：<%= message[i]["time"] %></small><div><%= message[i]["text"] %></div></li>
+          <% } %>
+        </ul>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
+  </div>
+  <input id="username" type="hidden" value="<%= username %>" />
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascripts/client.js"></script>
+</body>
+</html>
