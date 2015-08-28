@@ -19,31 +19,24 @@ var MsSchema2 = new Schema({
    pass: String,
 });
 
-// モデル化。model('[登録名]', '定義したスキーマクラス')
+//ページネーション設定
 MsSchema.plugin(mongoosePaginate);
+
+// モデル化。model('[登録名]', '定義したスキーマクラス')
 mongoose.model('Message', MsSchema);
 mongoose.model('User', MsSchema2);
 var Message = mongoose.model('Message');
 var User = mongoose.model('User');
 
+//exportしておく
 exports.module = Message
 exports.module = User
 
 // mongodb://[hostname]/[dbname]
 mongoose.connect('mongodb://localhost/message_db');
 
-exports.findAll = function(req, res) {
-  Message({}, function(err, results) {
-    if (err) {
-      res.send({'error': 'An error has occurred'});
-    } else {
-      console.log('Success: Getting winelist');
-      res.json(results);
-    }
-  });
-};
 
-
+//typeがchatのデータを取得するfunction
 exports.find = function(req, res) {
 if (req.query.page){
   paging = req.query.page
@@ -70,6 +63,7 @@ Message.paginate( {"type" : "chat" },{ page: paging, limit: 5, sortBy: { "time":
 });
 }
 
+//データを保存するfunction
 exports.save = function(data) {
   var message = new Message();
   message.type  = data.type;
@@ -82,6 +76,7 @@ exports.save = function(data) {
   });
 }
 
+//ユーザーデータを保存するfunction
 exports.user = function(req, res) {
   User.find({name: new RegExp(req.body.username, "i")}, function(err, results) {
     if (err) {
@@ -101,19 +96,7 @@ exports.user = function(req, res) {
 });
 }
 
-exports.pass = function(name, callback) {
-  User.find({name: new RegExp(name, "i")}, function(err, results) {
-    if (err) {
-      console.log('An error has occurred');
-    } else {
-      for (var i = 0, len = results.length; i < len; i++) {
-        result = results[i]
-      }
-      callback(result);
-    }
-}).limit(1);
-}
-
+//検索するfunction
 exports.search = function(callback, query) {
   Message.find({text: new RegExp(query, "i")}, function(err, results) {
     if (err) {
@@ -123,18 +106,3 @@ exports.search = function(callback, query) {
     }
 });
 }
-
-
-exports.findById = function(req, res) {
-  var id = req.params.id;
-  console.log('Retrieving wine: ' + id);
-
-  Message.findById(id, function(err, result) {
-    if (err) {
-      res.send({'error': 'An error has occurred'});
-    } else {
-      console.log('Success: ' + JSON.stringify(result));
-      res.json(result);
-    }
-  });
-};

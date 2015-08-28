@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+/* Library */
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -28,16 +29,15 @@ require('date-utils');
 var dt = new Date();
 var formatted = dt.toFormat("YYYYMMDDHH24MISS");
 var session = require('express-session');
+var mongoose = require('mongoose');
 
-
+/* jsを読み込む */
 var login = require('./routes/login');
 var chat = require('./routes/chat');
 var message = require('./routes/message');
 var search = require('./routes/search');
 var upload = require('./routes/upload');
 var signup = require('./routes/signup');
-
-var mongoose = require('mongoose');
 
 var app = express();
 
@@ -54,7 +54,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//session
+//session管理
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -73,6 +73,7 @@ var sessionCheck = function(req, res, next) {
 };
 
 
+/* ファイルupload */
 app.use(methodOverride())
 app.use(bodyParser({ uploadDir: path.join(__dirname, 'files'), keepExtensions: true }));
 app.use(busboy());
@@ -87,13 +88,10 @@ app.post('/upload', function(req, res) {
         fstream = fs.createWriteStream(__dirname + '/public/files/' + date + '-' + req.session.user_id + '-'+ filename);
         file.pipe(fstream);
         res.json(date + '-' + req.session.user_id + '-' + filename)
-        //fstream.on('close', function () {
-        //  res.render("aaa");
-        //});
     });
 });
 
-
+/* ログインや新規登録ページ */
 app.use('/', login);
 app.use('/signup', signup);
 app.post('/login', function(req, res) {
@@ -129,6 +127,8 @@ app.post('/create', function(req, res) {
   }
 });
 
+
+/* その他のページ */
 app.use('/', sessionCheck);
 app.use('/chat', chat);
 app.use('/message', message.findAll);

@@ -1,11 +1,11 @@
+//upload
+
 var fs;
 
 fs = require('fs');
 
 exports.post = function(req, res) {
   var target_path, tmp_path;
-  console.log("abcde");
-  console.log(req.files);
   tmp_path = req.files.thumbnail.path;
   target_path = './uploads/' + req.files.thumbnail.name;
   fs.rename(tmp_path, target_path, function(err) {
